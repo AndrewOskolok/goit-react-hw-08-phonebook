@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import AddContact from "../AddContact/AddContact";
-import AllContacts from "../AllContacts/AllContacts";
-import FilterContacts from "../FilterContacts/FilterContacts";
-import Alert from "../Alert/Alert";
+import AddContact from "../../components/AddContact/AddContact";
+import AllContacts from "../../components/AllContacts/AllContacts";
+import FilterContacts from "../../components/FilterContacts/FilterContacts";
+import Alert from "../../components/Alert/Alert";
 import { CSSTransition } from "react-transition-group";
+import "./Home.css";
 
 const Home = () => {
   const [showAlert, setShowAlert] = useState({ status: false, text: "" });
@@ -13,6 +14,7 @@ const Home = () => {
 
   return (
     <div>
+      <h2 className="title">Phonebook</h2>
       <AddContact setShowAlert={setShowAlert} />
       {contacts.length >= 2 && <FilterContacts />}
 

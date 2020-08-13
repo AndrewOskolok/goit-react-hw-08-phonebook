@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./SingleContact.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteUserOption } from "../../redux/operation/contactsOperation";
 
 const SingleContact = ({ name, number, id }) => {
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.token);
 
-  const userDeleteHandle = (id) => {
-    dispatch(deleteUserOption(id));
+  const userDeleteHandle = (id, token) => {
+    dispatch(deleteUserOption(id, token));
   };
 
   return (
@@ -17,7 +18,7 @@ const SingleContact = ({ name, number, id }) => {
       <p className={styles.contactNumber}>{number}</p>
       <button
         className={styles.contactButton}
-        onClick={() => userDeleteHandle(id)}
+        onClick={() => userDeleteHandle(id, token)}
       >
         X
       </button>
@@ -28,7 +29,7 @@ const SingleContact = ({ name, number, id }) => {
 SingleContact.propTypes = {
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default SingleContact;

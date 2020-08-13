@@ -1,29 +1,31 @@
 import React, { useEffect } from "react";
 import Header from "./components/Header/Header";
-import { CSSTransition } from "react-transition-group";
-import { useDispatch } from "react-redux";
-import { getUserOperation } from "./redux/operation/contactsOperation";
-import { Link, Switch, Route, Redirect } from "react-router-dom";
-import Registration from "./components/Registration/Registration";
-import Home from "./components/Home/Home";
+import { useSelector, useDispatch } from "react-redux";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import Registration from "./containers/Registration/Registration";
+import Home from "./containers/Home/Home";
+import Login from "./containers/Login/Login";
 import "./App.css";
-import Login from "./components/Login/Login";
+import { getUserOperation } from "./redux/operation/contactsOperation";
 
 function App() {
+  const history = useHistory();
   const dispatch = useDispatch();
 
+  const token = useSelector((state) => state.token);
+
   useEffect(() => {
-    dispatch(getUserOperation());
-  }, [dispatch]);
+    if (token) {
+      history.replace("/");
+      dispatch(getUserOperation(token));
+    } else {
+      history.replace("/login");
+    }
+  }, [token, history, dispatch]);
 
   return (
     <div className="container">
       <Header />
-      <Link to="/">
-        <CSSTransition in={true} appear={true} timeout={500} classNames="title">
-          <h1 className="title">Phonebook</h1>
-        </CSSTransition>
-      </Link>
 
       <Switch>
         <Route exact path="/" component={Home} />

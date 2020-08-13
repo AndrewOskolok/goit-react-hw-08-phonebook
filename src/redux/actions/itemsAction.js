@@ -1,9 +1,15 @@
-import { GET_USERS, ADD_USER, DELETE_USER } from "../constants/constants";
+import {
+  GET_USERS,
+  ADD_USER,
+  DELETE_USER,
+  CLEAR_USER,
+} from "../constants/constants";
 import { createAction } from "@reduxjs/toolkit";
 
 export const usersGet = createAction(GET_USERS);
 export const userAdd = createAction(ADD_USER);
 export const userDelete = createAction(DELETE_USER);
+export const userClear = createAction(CLEAR_USER);
 
 // export const userAdd = (value) => ({
 //   type: ADD_USER,

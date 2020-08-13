@@ -9,6 +9,7 @@ const Phonebook = ({ setShowAlert }) => {
   const [number, setNumber] = useState("");
 
   const contacts = useSelector((state) => state.items);
+  const token = useSelector((state) => state.token);
 
   const dispatch = useDispatch();
 
@@ -41,7 +42,7 @@ const Phonebook = ({ setShowAlert }) => {
     }
 
     const user = { name: name, number: number };
-    dispatch(postUserOperation(user));
+    dispatch(postUserOperation(user, token));
 
     setName("");
     setNumber("");
@@ -50,7 +51,7 @@ const Phonebook = ({ setShowAlert }) => {
   return (
     <form className={styles.form} autoComplete="off" onSubmit={submitHandler}>
       <input
-        className={styles.inputName}
+        className={styles.input}
         type="text"
         name="name"
         placeholder="Name"
@@ -58,7 +59,7 @@ const Phonebook = ({ setShowAlert }) => {
         onChange={inputName}
       ></input>
       <input
-        className={styles.inputnumber}
+        className={styles.input}
         type="text"
         name="number"
         placeholder="Nubmer"
